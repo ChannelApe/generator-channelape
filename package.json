@@ -10,7 +10,8 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "posttest": "nyc ava"
   },
   "files": [
     "app"
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "ava": "*",
+    "nyc": "^11.7.3",
     "pify": "^3.0.0",
     "xo": "*",
     "yeoman-assert": "^3.0.0",
@@ -68,5 +70,13 @@
     "ignores": [
       "app/templates/**"
     ]
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "report-dir": "./reports/lcov"
   }
 }
