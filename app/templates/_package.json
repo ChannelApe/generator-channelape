@@ -2,7 +2,8 @@
 	"name": "<%= moduleName %>",
 	"version": "0.0.0",
 	"description": "<%= moduleDescription %>",
-	"license": "MIT",
+	"license": "UNLICENSED",
+	"private": true,
 	"repository": "<%= githubUsername %>/<%= repoName %>",
 	"author": {
 		"name": "<%= name %>",

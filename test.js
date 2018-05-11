@@ -23,17 +23,11 @@ test.serial('generates expected files', async () => {
 	await pify(generator.run.bind(generator))();
 
 	assert.file([
-		'.editorconfig',
 		'.git',
-		'.gitattributes',
-		'.gitignore',
-		'.travis.yml',
 		'index.js',
-		'license',
 		'package.json',
-		'readme.md',
-		'test.js',
-		'.npmrc'
+		'README.md',
+		'test.js'
 	]);
 
 	assert.noFile('cli.js');
@@ -70,11 +64,12 @@ test.serial('nyc option', async () => {
 	assert.noFile('cli.js');
 	assert.fileContent('.gitignore', /\.nyc_output/);
 	assert.fileContent('.gitignore', /coverage/);
+	assert.fileContent('package.json', /"license": "UNLICENSED",/);
+	assert.fileContent('package.json', /"private": true/);
 	assert.fileContent('package.json', /"xo && nyc ava"/);
 	assert.fileContent('package.json', /"nyc": "/);
 	assert.noFileContent('package.json', /"codecov":/);
 	assert.noFileContent('package.json', /"lcov"/);
-	assert.noFileContent('.travis.yml', /codecov/);
 });
 
 test.serial('codecov option', async () => {
@@ -92,11 +87,12 @@ test.serial('codecov option', async () => {
 	assert.noFile('cli.js');
 	assert.fileContent('.gitignore', /\.nyc_output/);
 	assert.fileContent('.gitignore', /coverage/);
+	assert.fileContent('package.json', /"license": "UNLICENSED",/);
+	assert.fileContent('package.json', /"private": true/);
 	assert.fileContent('package.json', /"xo && nyc ava"/);
 	assert.fileContent('package.json', /"nyc": "/);
 	assert.fileContent('package.json', /"codecov":/);
 	assert.fileContent('package.json', /"lcov"/);
-	assert.fileContent('.travis.yml', /codecov/);
 });
 
 test('parse scoped package names', t => {
@@ -119,7 +115,7 @@ test.serial('prompts for description', async () => {
 	await pify(generator.run.bind(generator))();
 
 	assert.fileContent('package.json', /"description": "foo",/);
-	assert.fileContent('readme.md', /> foo/);
+	assert.fileContent('README.md', /> foo/);
 });
 
 test.serial('defaults to superb description', async () => {
@@ -135,5 +131,5 @@ test.serial('defaults to superb description', async () => {
 	await pify(generator.run.bind(generator))();
 
 	assert.fileContent('package.json', /"description": "My .+ module",/);
-	assert.fileContent('readme.md', /> My .+ module/);
+	assert.fileContent('README.md', /> My .+ module/);
 });

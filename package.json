@@ -10,8 +10,12 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "xo && ava",
-    "posttest": "nyc ava"
+    "lint": "xo",
+    "unit-test": "ava",
+    "pretest": "npm run lint",
+    "test": "npm run unit-test",
+    "posttest": "npm run cover",
+    "cover": "nyc npm run unit-test"
   },
   "files": [
     "app"
@@ -27,7 +31,6 @@
     "node_module",
     "node-module",
     "init",
-    "sindre",
     "channelape",
     "typescript",
     "ecommerce"
