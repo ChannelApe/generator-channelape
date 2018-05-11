@@ -1,15 +1,15 @@
 import path from 'path';
 import test from 'ava';
-import helpers from 'yeoman-test';
-import assert from 'yeoman-assert';
 import pify from 'pify';
+import assert from 'yeoman-assert';
+import helpers from 'yeoman-test';
 import utils from './app/utils';
 
 let generator;
 
 test.beforeEach(async () => {
 	await pify(helpers.testDirectory)(path.join(__dirname, 'temp'));
-	generator = helpers.createGenerator('nm:app', ['../app'], null, {skipInstall: true});
+	generator = helpers.createGenerator('channelape:app', ['../app'], null, {skipInstall: true});
 });
 
 test.serial('generates expected files', async () => {

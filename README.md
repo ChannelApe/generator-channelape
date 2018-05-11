@@ -1,18 +1,11 @@
-# generator-nm [![Build Status](https://travis-ci.org/sindresorhus/generator-nm.svg?branch=master)](https://travis-ci.org/sindresorhus/generator-nm)
+# generator-channelape
 
-> Scaffold out a [node module](https://github.com/sindresorhus/node-module-boilerplate)
-
-Optionally with a [CLI](http://en.wikipedia.org/wiki/Command-line_interface).
-
-This is what I use for [my own modules](https://www.npmjs.com/~sindresorhus).
-
-![](screenshot.png)
-
+Scaffold Node TypeScript Web Application to accept webhooks from [ChannelApe](https://www.channelape.com/).
 
 ## Install
 
 ```
-$ npm install --global yo generator-nm
+$ npm install --global yo generator-channelape
 ```
 
 
@@ -21,16 +14,16 @@ $ npm install --global yo generator-nm
 With [yo](https://github.com/yeoman/yo):
 
 ```
-$ yo nm
+$ yo channelape
 ```
 
 There are multiple command-line options available:
 
 ```
-$ yo nm --help
+$ yo channelape --help
 
   Usage:
-    yo nm [options]
+    yo channelape [options]
 
   Options:
     --help          # Print the generator's options and usage
@@ -48,8 +41,3 @@ The `--org` option takes a string value (i.e. `--org=avajs`). All others are boo
 ## Tip
 
 Use [chalk](https://github.com/sindresorhus/chalk) if you want colors in your CLI.
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

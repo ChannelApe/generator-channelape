@@ -1,16 +1,13 @@
 {
-  "name": "generator-nm",
-  "version": "3.5.0",
-  "description": "Scaffold out a node module",
-  "license": "MIT",
-  "repository": "sindresorhus/generator-nm",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
+  "name": "generator-channelape",
+  "version": "0.1.0",
+  "description": "Scaffold Node TypeScript Web Application to accept webhooks from ChannelApe.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChannelApe/generator-channelape.git"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=8"
   },
   "scripts": {
     "test": "xo && ava"
@@ -29,7 +26,25 @@
     "node_module",
     "node-module",
     "init",
-    "sindre"
+    "sindre",
+    "channelape",
+    "typescript",
+    "ecommerce"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "ChannelApe",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ChannelApe/generator-channelape/issues"
+  },
+  "homepage": "https://github.com/ChannelApe/generator-channelape#readme",
+  "contributors": [
+    {
+      "name": "R.J. Davis",
+      "email": "rjdavis@channelape.com"
+    }
   ],
   "dependencies": {
     "humanize-url": "^1.0.1",

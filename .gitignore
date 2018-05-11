@@ -1,2 +1,4 @@
-node_modules
-temp
+.nyc_output/
+.sonarlint/
+node_modules/
+reports/

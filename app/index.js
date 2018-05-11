@@ -30,8 +30,9 @@ module.exports = class extends Generator {
 			desc: 'Upload coverage to codecov.io (implies coverage)'
 		});
 	}
-	init() {
-		return this.prompt([{
+
+	async init() {
+		const props = await this.prompt([{
 			name: 'moduleName',
 			message: 'What do you want to name your module?',
 			default: _s.slugify(this.appname),
@@ -70,54 +71,56 @@ module.exports = class extends Generator {
 			type: 'confirm',
 			default: false,
 			when: x => (x.nyc || this.options.coverage) && (this.options.codecov === undefined)
-		}]).then(props => {
-			const or = (option, prop) => this.options[option] === undefined ? props[prop || option] : this.options[option];
+		}]);
 
-			const cli = or('cli');
-			const codecov = or('codecov');
-			const nyc = codecov || or('coverage', 'nyc');
+		const or = (option, prop) => this.options[option] === undefined ? props[prop || option] : this.options[option];
 
-			const repoName = utils.repoName(props.moduleName);
+		const cli = or('cli');
+		const codecov = or('codecov');
+		const nyc = codecov || or('coverage', 'nyc');
 
-			const tpl = {
-				moduleName: props.moduleName,
-				moduleDescription: props.moduleDescription,
-				camelModuleName: _s.camelize(repoName),
-				githubUsername: this.options.org || props.githubUsername,
-				repoName,
-				name: this.user.git.name(),
-				email: this.user.git.email(),
-				website: props.website,
-				humanizedWebsite: humanizeUrl(props.website),
-				cli,
-				nyc,
-				codecov
-			};
+		const repoName = utils.repoName(props.moduleName);
 
-			const mv = (from, to) => {
-				this.fs.move(this.destinationPath(from), this.destinationPath(to));
-			};
+		const tpl = {
+			moduleName: props.moduleName,
+			moduleDescription: props.moduleDescription,
+			camelModuleName: _s.camelize(repoName),
+			githubUsername: this.options.org || props.githubUsername,
+			repoName,
+			name: this.user.git.name(),
+			email: this.user.git.email(),
+			website: props.website,
+			humanizedWebsite: humanizeUrl(props.website),
+			cli,
+			nyc,
+			codecov
+		};
 
-			this.fs.copyTpl([
-				`${this.templatePath()}/**`,
-				'!**/cli.js'
-			], this.destinationPath(), tpl);
+		const mv = (from, to) => {
+			this.fs.move(this.destinationPath(from), this.destinationPath(to));
+		};
 
-			if (cli) {
-				this.fs.copyTpl(this.templatePath('cli.js'), this.destinationPath('cli.js'), tpl);
-			}
+		this.fs.copyTpl([
+			`${this.templatePath()}/**`,
+			'!**/cli.js'
+		], this.destinationPath(), tpl);
 
-			mv('editorconfig', '.editorconfig');
-			mv('gitattributes', '.gitattributes');
-			mv('gitignore', '.gitignore');
-			mv('travis.yml', '.travis.yml');
-			mv('npmrc', '.npmrc');
-			mv('_package.json', 'package.json');
-		});
+		if (cli) {
+			this.fs.copyTpl(this.templatePath('cli.js'), this.destinationPath('cli.js'), tpl);
+		}
+
+		mv('editorconfig', '.editorconfig');
+		mv('gitattributes', '.gitattributes');
+		mv('gitignore', '.gitignore');
+		mv('travis.yml', '.travis.yml');
+		mv('npmrc', '.npmrc');
+		mv('_package.json', 'package.json');
 	}
+
 	git() {
 		this.spawnCommandSync('git', ['init']);
 	}
+
 	install() {
 		this.installDependencies({bower: false});
 	}
