@@ -37,31 +37,7 @@ Lorem ipsum.
 Type: `boolean`<br>
 Default: `false`
 
-Lorem ipsum.<% if (cli) { %>
-
-
-## CLI
-
-```
-$ npm install --global <%= moduleName %>
-```
-
-```
-$ <%= repoName %> --help
-
-  Usage
-    <%= repoName %> [input]
-
-  Options
-    --foo  Lorem ipsum [Default: false]
-
-  Examples
-    $ <%= repoName %>
-    unicorns & rainbows
-    $ <%= repoName %> ponies
-    ponies & rainbows
-```<% } %>
-
+Lorem ipsum.
 
 ## License
 

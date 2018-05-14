@@ -9,26 +9,21 @@
 		"name": "<%= name %>",
 		"email": "<%= email %>",
 		"url": "<%= humanizedWebsite %>"
-	},<% if (cli) { %>
-	"bin": "cli.js",<% } %>
+	},
 	"engines": {
-		"node": ">=4"
+		"node": ">=8"
 	},
 	"scripts": {
 		"test": "xo && <% if (nyc) { %>nyc <% } %>ava"
 	},
 	"files": [
-		"index.js"<% if (cli) { %>,
-		"cli.js"<% } %>
+		"index.js"
 	],
-	"keywords": [<% if (cli) { %>
-		"cli-app",
-		"cli",<% } %>
+	"keywords": [
 		""
 	],
-	"dependencies": {<% if (cli) { %>
-		"meow": "^3.7.0"
-	<% } %>},
+	"dependencies": {
+	},
 	"devDependencies": {
 		"ava": "^0.20.0",<% if (codecov) { %>
 		"codecov": "^2.2.0",<% } %><% if (nyc) { %>

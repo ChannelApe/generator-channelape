@@ -16,7 +16,6 @@ test.serial('Given channelape org and no CLI and no github username when generat
 	helpers.mockPrompt(generator, {
 		moduleName: 'test',
 		website: 'test.com',
-		cli: false
 	});
 
 	await pify(generator.run.bind(generator))();
@@ -33,28 +32,11 @@ test.serial('Given channelape org and no CLI and no github username when generat
 	assert.fileContent('package.json', '"repository": "channelape/test"');
 });
 
-test.serial('CLI option', async () => {
-	helpers.mockPrompt(generator, {
-		moduleName: 'test',
-		website: 'test.com',
-		cli: true
-	});
-
-	await pify(generator.run.bind(generator))();
-
-	assert.file('cli.js');
-	assert.fileContent('package.json', /"bin":/);
-	assert.fileContent('package.json', /"bin": "cli.js"/);
-	assert.fileContent('package.json', /"meow"/);
-	assert.fileContent('package.json', '"repository": "channelape/test"');
-});
-
 test.serial('nyc option', async () => {
 	helpers.mockPrompt(generator, {
 		moduleName: 'test',
 		githubUsername: 'test',
 		website: 'test.com',
-		cli: false,
 		nyc: true,
 		codecov: false
 	});
@@ -78,7 +60,6 @@ test.serial('codecov option', async () => {
 		moduleName: 'test',
 		githubUsername: 'test',
 		website: 'test.com',
-		cli: false,
 		nyc: true,
 		codecov: true
 	});
@@ -109,7 +90,6 @@ test.serial('prompts for description', async () => {
 		moduleDescription: 'foo',
 		githubUsername: 'test',
 		website: 'test.com',
-		cli: false,
 		nyc: true,
 		codecov: true
 	});
@@ -126,7 +106,6 @@ test.serial('defaults to superb description', async () => {
 		moduleName: 'test',
 		githubUsername: 'test',
 		website: 'test.com',
-		cli: false,
 		nyc: true,
 		codecov: true
 	});

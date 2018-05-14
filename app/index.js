@@ -16,12 +16,6 @@ module.exports = class extends Generator {
 			required: false
 		});
 
-		this.argument('cli', {
-			type: Boolean,
-			desc: 'Add a CLI',
-			required: false
-		});
-
 		this.argument('coverage', {
 			type: Boolean,
 			desc: 'Add code coverage with nyc',
@@ -58,12 +52,6 @@ module.exports = class extends Generator {
 			validate: x => x.length > 0 ? true : 'You have to provide a website URL',
 			filter: x => normalizeUrl(x)
 		}, {
-			name: 'cli',
-			message: 'Do you need a CLI?',
-			type: 'confirm',
-			default: Boolean(this.options.cli),
-			when: () => this.options.cli === undefined
-		}, {
 			name: 'nyc',
 			message: 'Do you need code coverage?',
 			type: 'confirm',
@@ -79,7 +67,6 @@ module.exports = class extends Generator {
 
 		const or = (option, prop) => this.options[option] === undefined ? props[prop || option] : this.options[option];
 
-		const cli = or('cli');
 		const codecov = or('codecov');
 		const nyc = codecov || or('coverage', 'nyc');
 
@@ -95,7 +82,6 @@ module.exports = class extends Generator {
 			email: this.user.git.email(),
 			website: props.website,
 			humanizedWebsite: humanizeUrl(props.website),
-			cli,
 			nyc,
 			codecov
 		};
@@ -106,12 +92,7 @@ module.exports = class extends Generator {
 
 		this.fs.copyTpl([
 			`${this.templatePath()}/**`,
-			'!**/cli.js'
 		], this.destinationPath(), tpl);
-
-		if (cli) {
-			this.fs.copyTpl(this.templatePath('cli.js'), this.destinationPath('cli.js'), tpl);
-		}
 
 		mv('gitignore', '.gitignore');
 		mv('_package.json', 'package.json');
