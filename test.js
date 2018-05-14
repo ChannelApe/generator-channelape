@@ -9,110 +9,61 @@ let generator;
 
 test.beforeEach(async () => {
 	await pify(helpers.testDirectory)(path.join(__dirname, 'temp'));
-	generator = helpers.createGenerator('channelape:app', ['../app'], '--org=channelape', {skipInstall: true});
+	generator = helpers.createGenerator('channelape:app', ['../app'], null, {skipInstall: true});
 });
 
-test.serial('Given channelape org and no CLI and no github username when generating module then expect no CLI and expect channelape org', async () => {
+test.serial('Given module name When generating module Then expect correct files with default description', async () => {
 	helpers.mockPrompt(generator, {
-		moduleName: 'test',
-		website: 'test.com',
+		moduleName: 'test'
 	});
 
 	await pify(generator.run.bind(generator))();
 
 	assert.file([
 		'.git',
+		'.gitignore',
 		'index.js',
 		'package.json',
 		'README.md',
 		'test.js'
 	]);
 
-	assert.noFile('cli.js');
-	assert.fileContent('package.json', '"repository": "channelape/test"');
+	assert.fileContent('package.json', '"name": "test",');
+	assert.fileContent('package.json', '"description": "Web Application that accepts webhooks from ChannelApe.",');
+	assert.fileContent('package.json', '"license": "UNLICENSED",');
+	assert.fileContent('package.json', '"private": true,');
+	assert.fileContent('package.json', '"nyc": "');
+	assert.fileContent('package.json', '"lcov"');
+	assert.noFileContent('package.json', '"repository":');
+	assert.noFileContent('package.json', '"author": "channelape"');
+
+	assert.fileContent('README.md', '# test');
+	assert.fileContent('README.md', 'Web Application that accepts webhooks from ChannelApe.');
 });
 
-test.serial('nyc option', async () => {
+test.serial('Given module name And module description When generating module Then expect correct files with custom description', async () => {
 	helpers.mockPrompt(generator, {
 		moduleName: 'test',
-		githubUsername: 'test',
-		website: 'test.com',
-		nyc: true,
-		codecov: false
+		moduleDescription: 'Sends orders to supplier'
 	});
 
 	await pify(generator.run.bind(generator))();
 
-	assert.noFile('cli.js');
-	assert.fileContent('.gitignore', /\.nyc_output/);
-	assert.fileContent('.gitignore', /coverage/);
-	assert.fileContent('package.json', '"repository": "channelape/test"');
-	assert.fileContent('package.json', /"license": "UNLICENSED",/);
-	assert.fileContent('package.json', /"private": true/);
-	assert.fileContent('package.json', /"xo && nyc ava"/);
-	assert.fileContent('package.json', /"nyc": "/);
-	assert.noFileContent('package.json', /"codecov":/);
-	assert.noFileContent('package.json', /"lcov"/);
-});
+	assert.fileContent('package.json', '"name": "test",');
+	assert.fileContent('package.json', '"Sends orders to supplier",');
+	assert.fileContent('package.json', '"license": "UNLICENSED",');
+	assert.fileContent('package.json', '"private": true,');
+	assert.fileContent('package.json', '"nyc": "');
+	assert.fileContent('package.json', '"lcov"');
+	assert.noFileContent('package.json', '"repository":');
+	assert.noFileContent('package.json', '"author": "channelape"');
 
-test.serial('codecov option', async () => {
-	helpers.mockPrompt(generator, {
-		moduleName: 'test',
-		githubUsername: 'test',
-		website: 'test.com',
-		nyc: true,
-		codecov: true
-	});
-
-	await pify(generator.run.bind(generator))();
-
-	assert.noFile('cli.js');
-	assert.fileContent('.gitignore', /\.nyc_output/);
-	assert.fileContent('.gitignore', /coverage/);
-	assert.fileContent('package.json', '"repository": "channelape/test"');
-	assert.fileContent('package.json', /"license": "UNLICENSED",/);
-	assert.fileContent('package.json', /"private": true/);
-	assert.fileContent('package.json', /"xo && nyc ava"/);
-	assert.fileContent('package.json', /"nyc": "/);
-	assert.fileContent('package.json', /"codecov":/);
-	assert.fileContent('package.json', /"lcov"/);
+	assert.fileContent('README.md', '# test');
+	assert.fileContent('README.md', 'Sends orders to supplier');
 });
 
 test('parse scoped package names', t => {
 	t.is(utils.slugifyPackageName('author/thing'), 'author-thing', 'slugify non-scoped packages');
 	t.is(utils.slugifyPackageName('@author/thing'), '@author/thing', 'accept scoped packages');
 	t.is(utils.slugifyPackageName('@author/hi/there'), 'author-hi-there', 'fall back to regular slugify if invalid scoped name');
-});
-
-test.serial('prompts for description', async () => {
-	helpers.mockPrompt(generator, {
-		moduleName: 'test',
-		moduleDescription: 'foo',
-		githubUsername: 'test',
-		website: 'test.com',
-		nyc: true,
-		codecov: true
-	});
-
-	await pify(generator.run.bind(generator))();
-
-	assert.fileContent('package.json', /"description": "foo",/);
-	assert.fileContent('package.json', '"repository": "channelape/test"');
-	assert.fileContent('README.md', /> foo/);
-});
-
-test.serial('defaults to superb description', async () => {
-	helpers.mockPrompt(generator, {
-		moduleName: 'test',
-		githubUsername: 'test',
-		website: 'test.com',
-		nyc: true,
-		codecov: true
-	});
-
-	await pify(generator.run.bind(generator))();
-
-	assert.fileContent('package.json', /"description": "My .+ module",/);
-	assert.fileContent('package.json', '"repository": "channelape/test"');
-	assert.fileContent('README.md', /> My .+ module/);
 });

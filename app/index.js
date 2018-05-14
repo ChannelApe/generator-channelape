@@ -1,7 +1,4 @@
 'use strict';
-const superb = require('superb');
-const normalizeUrl = require('normalize-url');
-const humanizeUrl = require('humanize-url');
 const Generator = require('yeoman-generator');
 const _s = require('underscore.string');
 const utils = require('./utils');
@@ -10,22 +7,11 @@ module.exports = class extends Generator {
 	constructor(a, b) {
 		super(a, b);
 
-		this.argument('org', {
-			type: String,
-			desc: 'Publish to a GitHub organization account',
-			required: false
-		});
-
-		this.argument('coverage', {
+		this.argument('channelape', {
 			type: Boolean,
-			desc: 'Add code coverage with nyc',
-			required: false
-		});
-
-		this.argument('codecov', {
-			type: Boolean,
-			desc: 'Upload coverage to codecov.io (implies coverage)',
-			required: false
+			desc: 'This is a private module owned by ChannelApe',
+			required: false,
+			store: true
 		});
 	}
 
@@ -38,52 +24,19 @@ module.exports = class extends Generator {
 		}, {
 			name: 'moduleDescription',
 			message: 'What is your module description?',
-			default: `My ${superb()} module`
-		}, {
-			name: 'githubUsername',
-			message: 'What is your GitHub username?',
-			store: true,
-			validate: x => x.length > 0 ? true : 'You have to provide a username',
-			when: () => !this.options.org
-		}, {
-			name: 'website',
-			message: 'What is the URL of your website?',
-			store: true,
-			validate: x => x.length > 0 ? true : 'You have to provide a website URL',
-			filter: x => normalizeUrl(x)
-		}, {
-			name: 'nyc',
-			message: 'Do you need code coverage?',
-			type: 'confirm',
-			default: Boolean(this.options.codecov || this.options.coverage),
-			when: () => (this.options.coverage === undefined) && (this.options.codecov === undefined)
-		}, {
-			name: 'codecov',
-			message: 'Upload coverage to codecov.io?',
-			type: 'confirm',
-			default: false,
-			when: x => (x.nyc || this.options.coverage) && (this.options.codecov === undefined)
+			default: `Web Application that accepts webhooks from ChannelApe.`
 		}]);
 
 		const or = (option, prop) => this.options[option] === undefined ? props[prop || option] : this.options[option];
 
-		const codecov = or('codecov');
-		const nyc = codecov || or('coverage', 'nyc');
-
-		const repoName = utils.repoName(props.moduleName);
+		const channelape = or('channelape');
 
 		const tpl = {
 			moduleName: props.moduleName,
 			moduleDescription: props.moduleDescription,
-			camelModuleName: _s.camelize(repoName),
-			githubUsername: this.options.org || props.githubUsername,
-			repoName,
 			name: this.user.git.name(),
 			email: this.user.git.email(),
-			website: props.website,
-			humanizedWebsite: humanizeUrl(props.website),
-			nyc,
-			codecov
+			channelape
 		};
 
 		const mv = (from, to) => {
@@ -91,7 +44,7 @@ module.exports = class extends Generator {
 		};
 
 		this.fs.copyTpl([
-			`${this.templatePath()}/**`,
+			`${this.templatePath()}/**`
 		], this.destinationPath(), tpl);
 
 		mv('gitignore', '.gitignore');

@@ -4,36 +4,82 @@
 	"description": "<%= moduleDescription %>",
 	"license": "UNLICENSED",
 	"private": true,
-	"repository": "<%= githubUsername %>/<%= repoName %>",
+	<% if (channelape) { %> 
+	"author": "ChannelApe",
+	"contributors": [{
+		"name": "<%= name %>",
+		"email": "<%= email %>"
+	}],
+	<% } else { %>
 	"author": {
 		"name": "<%= name %>",
-		"email": "<%= email %>",
-		"url": "<%= humanizedWebsite %>"
+		"email": "<%= email %>"
 	},
+	<% } %>
 	"engines": {
 		"node": ">=8"
 	},
-	"scripts": {
-		"test": "xo && <% if (nyc) { %>nyc <% } %>ava"
-	},
-	"files": [
-		"index.js"
-	],
+  "scripts": {
+    "prepublishOnly": "npm run compile",
+    "start": "node dist/index.js",
+    "compile": "tsc && tsc -p test/tsconfig.json",
+    "lint": "tslint -p tsconfig.json && tslint -p test/tsconfig.json",
+    "unit-test": "mocha --opts ./test/mocha.opts",
+    "pretest": "npm run compile && npm run lint",
+    "test": "npm run unit-test",
+    "posttest": "npm run mutate && npm run cover",
+    "mutate": "stryker run",
+    "cover": "nyc npm run unit-test"
+  },
+  "files": [
+    "dist"
+  ],
 	"keywords": [
-		""
+		"channelape",
+		"webhook"
 	],
-	"dependencies": {
-	},
-	"devDependencies": {
-		"ava": "^0.20.0",<% if (codecov) { %>
-		"codecov": "^2.2.0",<% } %><% if (nyc) { %>
-		"nyc": "^11.0.0",<% } %>
-		"xo": "^0.18.2"
-	}<% if (codecov) { %>,
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-healthcheck": "^0.1.0",
+    "moment": "^2.22.1",
+    "ts-node": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.3",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^7.0.63",
+    "@types/sinon": "^4.3.1",
+    "@types/supertest": "^2.0.4",
+    "app-root-path": "^2.0.1",
+    "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.5.3",
+    "mocha-typescript": "^1.1.12",
+    "node-rest-client": "^3.1.0",
+    "nyc": "^11.7.1",
+    "sinon": "^4.5.0",
+    "stryker": "^0.17.2",
+    "stryker-api": "^0.12.0",
+    "stryker-html-reporter": "^0.11.5",
+    "stryker-mocha-framework": "^0.7.2",
+    "stryker-mocha-runner": "^0.10.8",
+    "stryker-typescript": "^0.8.3",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "typescript": "^2.8.3"
+  },
 	"nyc": {
-		"reporter": [
-			"lcov",
-			"text"
-		]
-	}<% } %>
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "report-dir": "./reports/lcov"
+  }
 }

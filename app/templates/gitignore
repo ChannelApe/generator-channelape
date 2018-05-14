@@ -1,4 +1,6 @@
-node_modules
-yarn.lock<% if (nyc) { %>
-.nyc_output
-coverage<% } %>
+dist/
+.nyc_output/
+.sonarlint/
+node_modules/
+reports/
+\.env
