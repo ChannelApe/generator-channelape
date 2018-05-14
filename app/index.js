@@ -10,24 +10,28 @@ module.exports = class extends Generator {
 	constructor(a, b) {
 		super(a, b);
 
-		this.option('org', {
-			type: 'string',
-			desc: 'Publish to a GitHub organization account'
+		this.argument('org', {
+			type: String,
+			desc: 'Publish to a GitHub organization account',
+			required: false
 		});
 
-		this.option('cli', {
-			type: 'boolean',
-			desc: 'Add a CLI'
+		this.argument('cli', {
+			type: Boolean,
+			desc: 'Add a CLI',
+			required: false
 		});
 
-		this.option('coverage', {
-			type: 'boolean',
-			desc: 'Add code coverage with nyc'
+		this.argument('coverage', {
+			type: Boolean,
+			desc: 'Add code coverage with nyc',
+			required: false
 		});
 
-		this.option('codecov', {
-			type: 'boolean',
-			desc: 'Upload coverage to codecov.io (implies coverage)'
+		this.argument('codecov', {
+			type: Boolean,
+			desc: 'Upload coverage to codecov.io (implies coverage)',
+			required: false
 		});
 	}
 

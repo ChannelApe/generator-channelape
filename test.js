@@ -9,13 +9,12 @@ let generator;
 
 test.beforeEach(async () => {
 	await pify(helpers.testDirectory)(path.join(__dirname, 'temp'));
-	generator = helpers.createGenerator('channelape:app', ['../app'], null, {skipInstall: true});
+	generator = helpers.createGenerator('channelape:app', ['../app'], '--org=channelape', {skipInstall: true});
 });
 
-test.serial('generates expected files', async () => {
+test.serial('Given channelape org and no CLI and no github username when generating module then expect no CLI and expect channelape org', async () => {
 	helpers.mockPrompt(generator, {
 		moduleName: 'test',
-		githubUsername: 'test',
 		website: 'test.com',
 		cli: false
 	});
@@ -31,12 +30,12 @@ test.serial('generates expected files', async () => {
 	]);
 
 	assert.noFile('cli.js');
+	assert.fileContent('package.json', '"repository": "channelape/test"');
 });
 
 test.serial('CLI option', async () => {
 	helpers.mockPrompt(generator, {
 		moduleName: 'test',
-		githubUsername: 'test',
 		website: 'test.com',
 		cli: true
 	});
@@ -47,6 +46,7 @@ test.serial('CLI option', async () => {
 	assert.fileContent('package.json', /"bin":/);
 	assert.fileContent('package.json', /"bin": "cli.js"/);
 	assert.fileContent('package.json', /"meow"/);
+	assert.fileContent('package.json', '"repository": "channelape/test"');
 });
 
 test.serial('nyc option', async () => {
@@ -64,6 +64,7 @@ test.serial('nyc option', async () => {
 	assert.noFile('cli.js');
 	assert.fileContent('.gitignore', /\.nyc_output/);
 	assert.fileContent('.gitignore', /coverage/);
+	assert.fileContent('package.json', '"repository": "channelape/test"');
 	assert.fileContent('package.json', /"license": "UNLICENSED",/);
 	assert.fileContent('package.json', /"private": true/);
 	assert.fileContent('package.json', /"xo && nyc ava"/);
@@ -87,6 +88,7 @@ test.serial('codecov option', async () => {
 	assert.noFile('cli.js');
 	assert.fileContent('.gitignore', /\.nyc_output/);
 	assert.fileContent('.gitignore', /coverage/);
+	assert.fileContent('package.json', '"repository": "channelape/test"');
 	assert.fileContent('package.json', /"license": "UNLICENSED",/);
 	assert.fileContent('package.json', /"private": true/);
 	assert.fileContent('package.json', /"xo && nyc ava"/);
@@ -115,6 +117,7 @@ test.serial('prompts for description', async () => {
 	await pify(generator.run.bind(generator))();
 
 	assert.fileContent('package.json', /"description": "foo",/);
+	assert.fileContent('package.json', '"repository": "channelape/test"');
 	assert.fileContent('README.md', /> foo/);
 });
 
@@ -131,5 +134,6 @@ test.serial('defaults to superb description', async () => {
 	await pify(generator.run.bind(generator))();
 
 	assert.fileContent('package.json', /"description": "My .+ module",/);
+	assert.fileContent('package.json', '"repository": "channelape/test"');
 	assert.fileContent('README.md', /> My .+ module/);
 });
