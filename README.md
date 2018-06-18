@@ -32,6 +32,7 @@ $ yo channelape --help
     --org           # Publish to a GitHub organization account
     --coverage      # Add code coverage with nyc
     --codecov       # Upload coverage to codecov.io (implies --coverage)
+    --channelape    # Specify that the generated repository is authored by ChannelApe, Inc.
 ```
 
 The `--org` option takes a string value (i.e. `--org=avajs`). All others are boolean flags and can be negated with the `no` prefix (i.e. `--no-codecov`). You will be prompted for any options not passed on the command-line.
