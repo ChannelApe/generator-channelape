@@ -13,6 +13,13 @@ module.exports = class extends Generator {
 			required: false,
 			store: true
 		});
+
+		this.argument('open', {
+			type: Boolean,
+			desc: 'Open the repository in VSCode',
+			required: false,
+			store: true
+		})
 	}
 
 	async init() {
@@ -49,6 +56,10 @@ module.exports = class extends Generator {
 
 		mv('gitignore', '.gitignore');
 		mv('_package.json', 'package.json');
+
+		if (or('open')) {
+			this._openVsCode();
+		}
 	}
 
 	git() {
@@ -58,4 +69,8 @@ module.exports = class extends Generator {
 	install() {
 		this.installDependencies({bower: false});
 	}
+
+	_openVsCode() {
+    this.spawnCommandSync('code', [this.destinationPath()]);
+  }
 };

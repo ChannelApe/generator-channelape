@@ -33,6 +33,7 @@ $ yo channelape --help
     --coverage      # Add code coverage with nyc
     --codecov       # Upload coverage to codecov.io (implies --coverage)
     --channelape    # Specify that the generated repository is authored by ChannelApe, Inc.
+    --open          # Opens the generated repository in a new vscode window.
 ```
 
 The `--org` option takes a string value (i.e. `--org=avajs`). All others are boolean flags and can be negated with the `no` prefix (i.e. `--no-codecov`). You will be prompted for any options not passed on the command-line.
