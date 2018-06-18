@@ -7,16 +7,18 @@ module.exports = class extends Generator {
 	constructor(a, b) {
 		super(a, b);
 
-		this.argument('channelape', {
+		this.option('channelape', {
 			type: Boolean,
 			desc: 'This is a private module owned by ChannelApe',
+			alias: 'ca',
 			required: false,
 			store: true
 		});
 
-		this.argument('open', {
+		this.option('open', {
 			type: Boolean,
 			desc: 'Open the repository in VSCode',
+			alias: 'o',
 			required: false,
 			store: true
 		})
