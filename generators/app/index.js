@@ -22,6 +22,14 @@ module.exports = class extends Generator {
 			required: false,
 			store: true
 		})
+
+		this.option('staging', {
+			type: Boolean,
+			desc: 'Prep the environment variables for use with the ChannelApe staging environment',
+			alias: 's',
+			required: false,
+			store: true
+		})
 	}
 
 	async init() {
@@ -38,6 +46,7 @@ module.exports = class extends Generator {
 
 		const or = (option, prop) => this.options[option] === undefined ? props[prop || option] : this.options[option];
 
+		const staging = or('staging');
 		const channelape = or('channelape');
 
 		const tpl = {
@@ -45,7 +54,8 @@ module.exports = class extends Generator {
 			moduleDescription: props.moduleDescription,
 			name: this.user.git.name(),
 			email: this.user.git.email(),
-			channelape
+			channelape,
+			staging
 		};
 
 		const mv = (from, to) => {
