@@ -1,7 +1,7 @@
 'use strict';
 const Generator = require('yeoman-generator');
 const _s = require('underscore.string');
-const utils = require('./utils');
+const utils = require('../utils');
 
 module.exports = class extends Generator {
 	constructor(a, b) {
@@ -56,7 +56,13 @@ module.exports = class extends Generator {
 			`${this.templatePath()}/**`
 		], this.destinationPath(), tpl);
 
+		this.fs.copyTpl([
+			`${this.templatePath()}/.**`
+		], this.destinationPath(), tpl);
+
 		mv('gitignore', '.gitignore');
+		mv('.env.example', '.env.example');
+		mv('.env', '.env');
 		mv('_package.json', 'package.json');
 
 		if (or('open')) {
