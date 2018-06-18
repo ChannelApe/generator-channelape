@@ -1,5 +1,6 @@
 # <%= moduleName %>
 <%= moduleName %>
+<%= moduleDescription %>
 To run app in production mode `npm install && npm t && npm prune --production && npm start`
 
 ## Setup
