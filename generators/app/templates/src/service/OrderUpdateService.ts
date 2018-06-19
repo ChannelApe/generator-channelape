@@ -1,4 +1,4 @@
-import { ChannelApeClient, Order, OrderStatus } from 'channelape-sdk';
+import { ChannelApeClient, Order } from 'channelape-sdk';
 import * as Q from 'q';
 import { Logger } from 'channelape-logger';
 import Secrets from '../util/Secrets';
