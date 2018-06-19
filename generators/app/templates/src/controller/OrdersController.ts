@@ -76,7 +76,7 @@ export default class OrdersController {
   private processOrders(orders: Order[]): Q.Promise<Order[]> {
     logger.info(`Received ${orders.length} total orders`);
     const deferred = Q.defer<Order[]>();
-    OrderFilteringService.getFilteredOrders(orders)
+    OrderFilteringService.filterOrders(orders)
       .then(filteredOrders => this.orderUpdateService.updateOrders(filteredOrders))
       .then(updatedOrders => deferred.resolve(updatedOrders))
       .catch((err: Error) => deferred.reject(err));

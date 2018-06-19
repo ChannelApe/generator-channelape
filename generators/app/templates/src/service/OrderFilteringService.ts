@@ -6,7 +6,7 @@ import Secrets from '../util/Secrets';
 const logger = new Logger('Order Filtering Service', Secrets.env.LOG_LEVEL);
 
 export default class OrderFilteringService {
-  public static getFilteredOrders(orders: Order[]): Q.Promise<Order[]> {
+  public static filterOrders(orders: Order[]): Q.Promise<Order[]> {
     const deferred = Q.defer<Order[]>();
     try {
       const parsedOrders = orders.filter(this.filterOrdersToBeParsed);
