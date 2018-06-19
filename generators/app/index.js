@@ -66,14 +66,11 @@ module.exports = class extends Generator {
 			`${this.templatePath()}/**`
 		], this.destinationPath(), tpl);
 
-		this.fs.copyTpl([
-			`${this.templatePath()}/.**`
-		], this.destinationPath(), tpl);
-
 		mv('gitignore', '.gitignore');
 		mv('_env.example', '.env.example');
 		mv('_env', '.env');
 		mv('_package.json', 'package.json');
+		mv('_vscode', '.vscode');
 
 		if (or('open')) {
 			this._openVsCode();
