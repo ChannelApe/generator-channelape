@@ -8,7 +8,7 @@ import * as os from 'os';
 import OrdersController from './controller/OrdersController';
 import Secrets from './util/Secrets';
 
-const logger = new Logger('1', Secrets.env.LOG_LEVEL);
+const logger = new Logger('Index', Secrets.env.LOG_LEVEL);
 handleErrors();
 Secrets.validateEnvars();
 const channelApeClient = new ChannelApeClient({
