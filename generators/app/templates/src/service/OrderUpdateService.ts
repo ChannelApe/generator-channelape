@@ -33,11 +33,17 @@ export default class OrderUpdateService {
 
   private updateSingleOrder(order: Order): Q.Promise<Order> {
     const deferred = Q.defer<Order>();
-    this.channelApeClient.orders().update(order)
+    const updatedOrder = this.getUpdatedOrder(order);
+    this.channelApeClient.orders().update(updatedOrder)
       .then((updatedOrder: Order) => deferred.resolve(updatedOrder))
       .catch((err: Error) => {
         deferred.reject(`Failed to update order with ID of ${order.id} due to error of: ${JSON.stringify(err)}`);
       });
     return deferred.promise;
+  }
+
+  private getUpdatedOrder(order: Order): Order {
+    // TODO: Add logic to update the order
+    return order;
   }
 }
