@@ -1,11 +1,11 @@
 # Copy this to .env and fill in
 
 # Required
-CHANNEL_APE_SECRET_KEY=
-OPEN_ORDERS_RETRIEVAL_DELAY_MINUTES=
-CHANNEL_APE_API_DOMAIN_NAME=https://<% if (staging) { %>staging-<% } else {}%> %>api.channelape.com
-MINIMUM_ORDER_ID=
+CHANNEL_APE_SECRET_KEY=<%= channelApeApiKey %>
+OPEN_ORDERS_RETRIEVAL_DELAY_MINUTES=15
+CHANNEL_APE_API_DOMAIN_NAME=https://<% if (staging) { %>staging-<% } else {}%>api.channelape.com
+MINIMUM_ORDER_ID=0
 
 # Optional
-OPEN_ORDERS_START_DATE_INTERVAL_DAYS=
-LOG_LEVEL=
+OPEN_ORDERS_START_DATE_INTERVAL_DAYS=7
+LOG_LEVEL=INFO

@@ -7,6 +7,13 @@ module.exports = class extends Generator {
 	constructor(a, b) {
 		super(a, b);
 
+		this.argument('channelApeApiKey', {
+			type: String,
+			desc: 'The key used to access the ChannelApe API',
+			required: false,
+			store: true
+		});
+
 		this.option('channelape', {
 			type: Boolean,
 			desc: 'This is a private module owned by ChannelApe',
@@ -48,6 +55,7 @@ module.exports = class extends Generator {
 
 		const staging = or('staging');
 		const channelape = or('channelape');
+		const channelApeApiKey = or('channelApeApiKey');
 
 		const tpl = {
 			moduleName: props.moduleName,
@@ -55,7 +63,8 @@ module.exports = class extends Generator {
 			name: this.user.git.name(),
 			email: this.user.git.email(),
 			channelape,
-			staging
+			staging,
+			channelApeApiKey
 		};
 
 		const mv = (from, to) => {
