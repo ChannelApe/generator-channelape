@@ -12,7 +12,7 @@ and run `npm install`.
 Route | Description
 ----- | -----------
 GET /healthcheck | Returns the process uptime
-POST /orders | Will query orders from CA, parse into a CSV, and upload to RSS Bus. Needs an actionId as part of the POST body
+POST /orders | Will query orders from CA, filter them, and then update them. Needs an actionId as part of the POST body
 
 ## Environment Variables
 Look at the .env.example for a list of required and optional env vars
