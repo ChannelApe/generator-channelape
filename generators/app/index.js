@@ -71,8 +71,8 @@ module.exports = class extends Generator {
 		], this.destinationPath(), tpl);
 
 		mv('gitignore', '.gitignore');
-		mv('.env.example', '.env.example');
-		mv('.env', '.env');
+		mv('_env.example', '.env.example');
+		mv('_env', '.env');
 		mv('_package.json', 'package.json');
 
 		if (or('open')) {
