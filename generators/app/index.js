@@ -79,7 +79,7 @@ module.exports = class extends Generator {
 		mv('_env.example', '.env.example');
 		mv('_env', '.env');
 		mv('_package.json', 'package.json');
-		mv('_vscode', '.vscode');
+		mv('_vscode/**', '.vscode/');
 
 		if (or('open')) {
 			this._openVsCode();
