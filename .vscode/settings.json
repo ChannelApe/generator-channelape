@@ -2,5 +2,7 @@
   "editor.codeActionsOnSave": {
      "source.organizeImports": false
   },
-  "editor.detectIndentation": true
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
 }

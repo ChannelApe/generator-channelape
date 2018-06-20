@@ -5,9 +5,9 @@ module.exports = function (config) {
       'test/**/*.spec.*',
       'test/**/*.ts',
       '!src/index.ts',
-      { pattern: 'test/**/*.csv', included: false, mutate: false },
-      { pattern: 'test/**/*.json', included: false, mutate: false },
-      { pattern: 'test/**/*.xlsx', included: false, mutate: false }
+      {pattern: 'test/**/*.csv', included: false, mutate: false},
+      {pattern: 'test/**/*.json', included: false, mutate: false},
+      {pattern: 'test/**/*.xlsx', included: false, mutate: false}
     ],
     testRunner: 'mocha',
     mutator: 'typescript',

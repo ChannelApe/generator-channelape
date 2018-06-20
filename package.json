@@ -69,7 +69,8 @@
   "xo": {
     "ignores": [
       "app/templates/**"
-    ]
+    ],
+    "space": true
   },
   "nyc": {
     "reporter": [
