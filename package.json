@@ -48,6 +48,18 @@
     {
       "name": "R.J. Davis",
       "email": "rjdavis@channelape.com"
+		},
+		{
+			"name": "Ryan Kazokas",
+			"email": "rkazokas@channelape.com"
+		},
+		{
+			"name": "Frank Mazzarella",
+			"email": "fmazzarella@channelape.com"
+		},
+		{
+			"name": "Craig A. Simko",
+			"email": "csimko@channelape.com"
     }
   ],
   "dependencies": {
