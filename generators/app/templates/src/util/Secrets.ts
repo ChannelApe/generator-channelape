@@ -3,11 +3,11 @@ import * as dotenv from 'dotenv';
 export default class Secrets {
   public static env: { [key: string]: string; } = {
     CHANNEL_APE_SECRET_KEY: '',
-    OPEN_ORDERS_RETRIEVAL_DELAY_MINUTES: '',
+    CHANNEL_APE_OPEN_ORDERS_RETRIEVAL_DELAY_MINUTES: '',
     CHANNEL_APE_API_DOMAIN_NAME: '',
-    MINIMUM_ORDER_ID: '',
+    CHANNEL_APE_OPEN_ORDERS_START_DATE: '',
     PORT: '3000',
-    OPEN_ORDERS_START_DATE_INTERVAL_DAYS: '7',
+    CHANNEL_APE_OPEN_ORDERS_START_DATE_INTERVAL_DAYS: '7',
     LOG_LEVEL: 'info'
   };
 
