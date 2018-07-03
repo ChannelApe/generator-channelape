@@ -1,21 +1,23 @@
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     files: [
-      'src/**/*.ts',
-      'test/**/*.spec.*',
-      'test/**/*.ts',
-      '!src/index.ts',
-      {pattern: 'test/**/*.csv', included: false, mutate: false},
-      {pattern: 'test/**/*.json', included: false, mutate: false},
-      {pattern: 'test/**/*.xlsx', included: false, mutate: false}
+      "test/**/*.ts",
+      "src/**/*.ts",
+      "!src/types/*d.ts",
+      "!src/index.ts"
     ],
-    testRunner: 'mocha',
-    mutator: 'typescript',
-    transpilers: ['typescript'],
-    reporter: ['html', 'clear-text', 'progress'],
-    testFramework: 'mocha',
-    coverageAnalysis: 'off',
-    tsconfigFile: 'tsconfig.json',
-    mutate: ['src/**/*.ts', '!src/index.ts', '!src/types/**/*d.ts']
+    testRunner: "mocha",
+    mutator: "typescript",
+    transpilers: ["typescript"],
+    reporter: ["clear-text", "progress", "html"],
+    testFramework: "mocha",
+    coverageAnalysis: "off",
+    tsconfigFile: "tsconfig.json",
+    thresholds: { high: 90, low: 70, break: 20 },
+    mutate: [
+      "src/**/*.ts",
+      "!src/types/*d.ts",
+      "!src/index.ts"
+    ]
   });
 };
