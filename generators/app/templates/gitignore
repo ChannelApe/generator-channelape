@@ -3,5 +3,5 @@ dist/
 .sonarlint/
 node_modules/
 reports/
-\.env
+.env
 .stryker-tmp
