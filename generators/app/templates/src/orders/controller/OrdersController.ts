@@ -103,8 +103,13 @@ export default class OrdersController {
   }
 
   private getOpenOrderRetrievalStartDate(now: moment.Moment): Date {
-    return now
-      .subtract({ days: parseInt(Secrets.env.OPEN_ORDERS_START_DATE_INTERVAL_DAYS, PARSE_INT_RADIX) }).toDate();
+    const lookBackIntervalDate =
+      now.subtract({ days: parseInt(Secrets.env.OPEN_ORDERS_START_DATE_INTERVAL_DAYS, PARSE_INT_RADIX) });
+    const absoluteStartDate: moment.Moment = moment(new Date(Secrets.env.CHANNEL_APE_OPEN_ORDERS_START_DATE));
+    if (lookBackIntervalDate.unix() > absoluteStartDate.unix()) {
+      return lookBackIntervalDate.toDate();
+    }
+    return absoluteStartDate.toDate();
   }
 
   private getOpenOrderRetrievalEndDate(now: moment.Moment): Date {
