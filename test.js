@@ -24,14 +24,15 @@ test.serial('Given module name When generating module Then expect correct files 
     '.gitignore',
     'package.json',
     'README.md',
-    'test/controller/OrdersController.spec.ts',
+    'test/orders/controller/OrdersController.spec.ts',
     'tslint.json',
     'tsconfig.json',
     'stryker.conf.js',
     'sonar-project.properties',
     '.env',
     '.env.example',
-    'src/index.ts'
+    'src/index.ts',
+    '.vscode/launch.json'
   ]);
 
   assert.fileContent('package.json', '"name": "test",');
