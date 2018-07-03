@@ -6,7 +6,7 @@ import { Logger } from 'channelape-logger';
 import OrderFilteringService from '../service/OrderFilteringService';
 import OrderUpdateService from '../service/OrderUpdateService';
 
-import Secrets from '../util/Secrets';
+import Secrets from '../../util/Secrets';
 
 const logger = new Logger('Orders Controller', Secrets.env.LOG_LEVEL);
 

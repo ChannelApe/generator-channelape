@@ -1,7 +1,7 @@
 import { ChannelApeClient, Order } from 'channelape-sdk';
 import * as Q from 'q';
 import { Logger } from 'channelape-logger';
-import Secrets from '../util/Secrets';
+import Secrets from '../../util/Secrets';
 
 const logger = new Logger('Order Update Service', Secrets.env.LOG_LEVEL);
 

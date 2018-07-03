@@ -5,7 +5,7 @@ import * as compression from 'compression';
 import * as express from 'express';
 import * as fs from 'fs';
 import * as os from 'os';
-import OrdersController from './controller/OrdersController';
+import OrdersController from './orders/controller/OrdersController';
 import Secrets from './util/Secrets';
 
 const logger = new Logger('Index', Secrets.env.LOG_LEVEL);

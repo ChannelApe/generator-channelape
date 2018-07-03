@@ -4,7 +4,7 @@ import { ChannelApeClient, Order, ChannelApeError } from 'channelape-sdk';
 import * as fs from 'fs';
 import * as sinon from 'sinon';
 import { mockReq, mockRes } from 'sinon-express-mock';
-import OrdersController from '../../src/controller/OrdersController';
+import OrdersController from '../../../src/orders/controller/OrdersController';
 
 describe('OrdersController', () => {
   let sandbox: sinon.SinonSandbox;
