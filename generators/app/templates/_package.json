@@ -40,7 +40,6 @@
 		"webhook"
 	],
   "dependencies": {
-    "@channelape-inc/rssbus-js-sdk": "^1.0.4",
     "app-root-path": "^2.0.1",
     "body-parser": "^1.18.2",
     "channelape-logger": "^0.1.5",
