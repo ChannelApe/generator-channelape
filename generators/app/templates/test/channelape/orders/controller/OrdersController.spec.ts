@@ -4,7 +4,7 @@ import { ChannelApeClient, Order, ChannelApeError } from 'channelape-sdk';
 import * as fs from 'fs';
 import * as sinon from 'sinon';
 import { mockReq, mockRes } from 'sinon-express-mock';
-import OrdersController from '../../../src/orders/controller/OrdersController';
+import OrdersController from '../../../../src/channelape/orders/controller/OrdersController';
 
 describe('OrdersController', () => {
   let sandbox: sinon.SinonSandbox;
@@ -28,7 +28,9 @@ describe('OrdersController', () => {
   it('responds with a 200 status', () => {
     const request = { body: { actionId: 'action_id' } };
     const req = mockReq(request);
-    const res = mockRes();
+    const res = mockRes<{ headersSent: boolean }>({
+      headersSent: false
+    });
     return ordersController.handle(req, res)
       .then(() => {
         expect(res.sendStatus.calledWith(200)).to.be.true;
@@ -36,11 +38,18 @@ describe('OrdersController', () => {
   });
 
   it('rejects requests without an action ID', () => {
+    sandbox.restore();
+    mock(true);
     const req = mockReq();
     const res = mockRes();
-    ordersController.handle(req, res);
-    expect(res.status.calledWith(400)).to.be.true;
-    expect(res.send.getCall(0).args[0]).to.equal('ERROR: missing actionId on request body');
+    return ordersController.handle(req, res)
+      .then(() => {
+        throw new Error('Should not have resolved!');
+      })
+      .catch(() => {
+        expect(res.status.calledWith(400)).to.be.true;
+        expect(res.send.getCall(0).args[0].message).to.equal('missing actionId on request body');
+      });
   });
 
   it('receives orders from the channelape SDK', () => {
@@ -96,11 +105,15 @@ describe('OrdersController', () => {
       });
   });
 
-  function mock() {
+  function mock(rejectAction: boolean = false) {
     sandbox = sinon.createSandbox();
     mockOrderData1 = JSON.parse(fs.readFileSync(`${appRootPath}/test/resources/orders1.json`, 'utf-8'));
 
-    updateHealthCheckStub = sandbox.stub().resolves({ healthCheckIntervalInSeconds: 300 });
+    if (rejectAction) {
+      updateHealthCheckStub = sandbox.stub().rejects(new Error('missing actionId on request body'));
+    } else {
+      updateHealthCheckStub = sandbox.stub().resolves({ healthCheckIntervalInSeconds: 300 });
+    }
     completeHealthCheckStub = sandbox.stub().resolves();
     errorHealthCheckStub = sandbox.stub().resolves();
     ordersGetStub = sandbox.stub().resolves(mockOrderData1);
