@@ -15,18 +15,28 @@ install:
 script:
 - npm test
 after_success:
-- bash .travis/overwrite-sonar-project-version.sh
-- sonar-scanner
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash .travis/overwrite-sonar-project-version.sh; fi
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then sonar-scanner; fi
 cache:
   directories:
   - node_modules
   - "$HOME/.sonar/cache"
 deploy:
-  provider: npm
-  email:
-    - "$NPM_EMAIL"
-  api_key:
-    - "$NPM_TOKEN"
-  on:
-    tags: true
-    repo: ChannelApe/generator-channelape
+  - provider: npm
+    skip_cleanup: true
+    email:
+      - "$NPM_EMAIL"
+    api_key:
+      - "$NPM_TOKEN"
+    tag: develop
+    on:
+      branch: develop
+  - provider: npm
+    skip_cleanup: true
+    email:
+      - "$NPM_EMAIL"
+    api_key:
+      - "$NPM_TOKEN"
+    tag: latest
+    on:
+      branch: master
