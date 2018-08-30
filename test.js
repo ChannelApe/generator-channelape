@@ -24,7 +24,7 @@ test.serial('Given module name When generating module Then expect correct files 
     '.gitignore',
     'package.json',
     'README.md',
-    'test/orders/controller/OrdersController.spec.ts',
+    'test/channelape/orders/controller/OrdersController.spec.ts',
     'tslint.json',
     'tsconfig.json',
     'stryker.conf.js',
