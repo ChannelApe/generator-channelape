@@ -87,6 +87,9 @@ test.serial('Given module name And module description When generating module The
 });
 
 test.serial('Given channelape and open flag When generating module Then expect .npmrc file', async () => {
+  console.log('+++++++++++++++++++++++');
+  console.log(`${AppRootPath}\\temp`);
+  console.log('+++++++++++++++++++++++');
   spawnCommandSyncStub = sinon.stub(Generator.prototype, 'spawnCommandSync')
     .withArgs('code', [`${AppRootPath}\\temp`]);
   generator = helpers.createGenerator('channelape:app', ['../generators/app'], null,

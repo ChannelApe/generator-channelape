@@ -99,6 +99,9 @@ module.exports = class extends Generator {
   }
 
   _openVsCode() {
+    console.log('---------------------');
+    console.log(this.destinationPath());
+    console.log('---------------------');
     this.spawnCommandSync('code', [this.destinationPath()]);
   }
 };
