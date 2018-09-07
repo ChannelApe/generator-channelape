@@ -37,21 +37,6 @@ describe('OrdersController', () => {
       });
   });
 
-  it('rejects requests without an action ID', () => {
-    sandbox.restore();
-    mock(true);
-    const req = mockReq();
-    const res = mockRes();
-    return ordersController.handle(req, res)
-      .then(() => {
-        throw new Error('Should not have resolved!');
-      })
-      .catch(() => {
-        expect(res.status.calledWith(400)).to.be.true;
-        expect(res.send.getCall(0).args[0].message).to.equal('missing actionId on request body');
-      });
-  });
-
   it('receives orders from the channelape SDK', () => {
     const request = { body: { actionId: 'action_id' } };
     const req = mockReq(request);

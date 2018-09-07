@@ -1,10 +1,10 @@
 import { ChannelApeClient, Order, OrderStatus, OrdersQueryRequestByBusinessId } from 'channelape-sdk';
+import { ChannelApeActionsController } from 'channelape-web-service-sdk';
 import * as moment from 'moment';
 import * as Q from 'q';
 import { Logger } from 'channelape-logger';
 
 import Secrets from '../../util/Secrets';
-import ChannelApeActionsController from '../../controller/ChannelApeActionsController';
 import OrderFilteringService from '../service/OrderFilteringService';
 import OrderUpdateService from '../service/OrderUpdateService';
 
