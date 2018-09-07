@@ -4,7 +4,6 @@ import test from 'ava';
 import pify from 'pify';
 import assert from 'yeoman-assert';
 import helpers from 'yeoman-test';
-import * as AppRootPath from 'app-root-path';
 import utils from './generators/utils';
 
 const Generator = require('yeoman-generator');
@@ -87,11 +86,8 @@ test.serial('Given module name And module description When generating module The
 });
 
 test.serial('Given channelape and open flag When generating module Then expect .npmrc file', async () => {
-  console.log('+++++++++++++++++++++++');
-  console.log(`${AppRootPath}\\temp`);
-  console.log('+++++++++++++++++++++++');
   spawnCommandSyncStub = sinon.stub(Generator.prototype, 'spawnCommandSync')
-    .withArgs('code', [`${AppRootPath}\\temp`]);
+    .withArgs('code');
   generator = helpers.createGenerator('channelape:app', ['../generators/app'], null,
     {skipInstall: true, channelape: true, open: true});
   helpers.mockPrompt(generator, {
