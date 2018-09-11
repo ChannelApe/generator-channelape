@@ -40,9 +40,10 @@
 		"webhook"
 	],
   "dependencies": {
+    "channelape-sdk": "^1.2.0",
+    "channelape-web-service-sdk": "^0.1.0",
+    "channelape-logger": "^0.1.6",    
     "body-parser": "^1.18.2",
-    "channelape-logger": "^0.1.5",
-    "channelape-sdk": "^1.0.1",
     "compression": "^1.7.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",

@@ -1,6 +1,6 @@
 {
   "name": "generator-channelape",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Scaffold Node TypeScript Web Application to accept webhooks from ChannelApe.",
   "repository": {
     "type": "git",
@@ -48,18 +48,18 @@
     {
       "name": "R.J. Davis",
       "email": "rjdavis@channelape.com"
-		},
-		{
-			"name": "Ryan Kazokas",
-			"email": "rkazokas@channelape.com"
-		},
-		{
-			"name": "Frank Mazzarella",
-			"email": "fmazzarella@channelape.com"
-		},
-		{
-			"name": "Craig A. Simko",
-			"email": "csimko@channelape.com"
+    },
+    {
+      "name": "Ryan Kazokas",
+      "email": "rkazokas@channelape.com"
+    },
+    {
+      "name": "Frank Mazzarella",
+      "email": "fmazzarella@channelape.com"
+    },
+    {
+      "name": "Craig A. Simko",
+      "email": "csimko@channelape.com"
     }
   ],
   "dependencies": {
@@ -69,8 +69,10 @@
   },
   "devDependencies": {
     "ava": "*",
+    "cross-spawn": "^6.0.5",
     "nyc": "^11.7.3",
     "pify": "^3.0.0",
+    "sinon": "^6.2.0",
     "xo": "*",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.0.0"
