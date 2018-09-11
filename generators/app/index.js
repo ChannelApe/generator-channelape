@@ -81,6 +81,10 @@ module.exports = class extends Generator {
     mv('_package.json', 'package.json');
     mv('_vscode/**', '.vscode/');
 
+    if (channelape) {
+      mv('_npmrc', '.npmrc');
+    }
+
     if (or('open')) {
       this._openVsCode();
     }

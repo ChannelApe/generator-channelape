@@ -1,6 +1,6 @@
 {
   "name": "generator-channelape",
-  "version": "0.2.0-develop.0",
+  "version": "0.2.0-develop.1",
   "description": "Scaffold Node TypeScript Web Application to accept webhooks from ChannelApe.",
   "repository": {
     "type": "git",
@@ -69,8 +69,10 @@
   },
   "devDependencies": {
     "ava": "*",
+    "cross-spawn": "^6.0.5",
     "nyc": "^11.7.3",
     "pify": "^3.0.0",
+    "sinon": "^6.2.0",
     "xo": "*",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.0.0"
