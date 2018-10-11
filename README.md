@@ -50,3 +50,15 @@ Arguments:
 ```
 
 The `--org` option takes a string value (i.e. `--org=avajs`). All others are boolean flags and can be negated with the `no` prefix (i.e. `--no-codecov`). You will be prompted for any options not passed on the command-line.
+
+
+## Use Cases
+
+Common Platform & SDK Use Cases:
+* [Distributed Order Management](https://www.channelape.com/solutions/distributed-order-management/)
+* [Shopify Inventory Management](https://www.channelape.com/solutions/shopify-inventory-management/)
+* [Shopify Order Management](https://www.channelape.com/solutions/shopify-plus-order-management/)
+* [eBay Inventory Management](https://www.channelape.com/solutions/ebay-inventory-management/)
+* [eBay Order Management](https://www.channelape.com/solutions/ebay-order-management/)
+* [Amazon Inventory Management](https://www.channelape.com/solutions/amazon-inventory-management/)
+* [Amazon Order Management](https://www.channelape.com/solutions/amazon-order-management/)
