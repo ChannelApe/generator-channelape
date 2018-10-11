@@ -1,6 +1,6 @@
 {
   "name": "generator-channelape",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Scaffold Node TypeScript Web Application to accept webhooks from ChannelApe.",
   "repository": {
     "type": "git",
