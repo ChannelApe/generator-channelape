@@ -55,6 +55,9 @@ The `--org` option takes a string value (i.e. `--org=avajs`). All others are boo
 ## Use Cases
 
 Common Platform & SDK Use Cases:
+* [3pl companies](https://www.channelape.com/list/top-100-us-and-global-third-party-logistics-providers-3pl-2019/)
+* [3pl providers](https://www.channelape.com/list/top-100-us-and-global-third-party-logistics-providers-3pl-2019/)
+* [top 3pls](https://www.channelape.com/list/top-100-us-and-global-third-party-logistics-providers-3pl-2019/)
 * [Distributed Order Management](https://www.channelape.com/solutions/distributed-order-management/)
 * [Shopify Inventory Management](https://www.channelape.com/solutions/shopify-inventory-management/)
 * [Shopify Order Management](https://www.channelape.com/solutions/shopify-plus-order-management/)
